@@ -48,6 +48,18 @@ We have two queries:
   
   We then print each element of our series as a single line of space-separated values.
   
+  
+** Understanding the Algorithm
+We can find the pattern as:
+    print \q\ of times
+        for n of times
+            if n is 0
+                constant = 1
+                print answer = a + (constant * b)
+            else
+                constant = constant * 2
+                print answer = answer + (a + (constant * b))
+                
 **************************************************************************************/
   
 import java.util.*;
@@ -57,25 +69,38 @@ class Solution{
     public static void main(String []argh){
         Scanner in = new Scanner(System.in);
         int t=in.nextInt();
+        
+        // for \q\ of times
         for(int i=0;i<t;i++){
             int a = in.nextInt();
             int b = in.nextInt();
             int n = in.nextInt();
             
+            // assign tempAnswer and constant integers
             int tempAnswer = 0;
             int constant = 0;
             
+            // for \n\ of times
             for(int j=0; j<n; j++) {
+                
+                // if \j\ is 0, which is same as \n\ is 0
                 if (j==0) {
+                    
+                    // set constant as 1
                     constant = 1;
                     tempAnswer = a + (constant*b);
                 }
                 else {
+                    
+                    // set constant as constant * 2
                     constant *= 2;
+                    // you have to add the previous tempAnswer number
                     tempAnswer = tempAnswer + (constant*b);
                 }
+                // print tempAnswer with space
                 System.out.print(tempAnswer + " ");
             }
+            // after the first loop, give another line
             System.out.println();
         }
         in.close();
